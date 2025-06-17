@@ -1,6 +1,5 @@
-
 import "@/styles/globals.css";
-import {Providers} from "./providers";
+import { Providers } from "./providers";
 
 export const metadata = {
   title: "Create Next App",
@@ -11,7 +10,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`antialiased`}
+        className={`antialiased bg-custom-dark`}
       >
         <Providers>
           {children}

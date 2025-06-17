@@ -13,7 +13,19 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'custom-dark': '#0e0e0e',
+        'beige-text': '#d9c2a7', 
+        'gray-accent': '#666666',
+        'card-bg': '#1c1c1c',
+      },
+
+      fontFamily: {
+        'custom-serif': ['"Playfair Display", serif'], 
+        'custom-sans': ['"Inter", sans-serif'], 
+      },
+    },
   },
   darkMode: "class",
   plugins: [heroui()]

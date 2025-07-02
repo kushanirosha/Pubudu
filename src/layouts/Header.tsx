@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { useScrollProgress } from '../hooks/useScrollAnimation';
-import logo from '../assets/images/logo.png';
+import logo from '../public/images/logo.png';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

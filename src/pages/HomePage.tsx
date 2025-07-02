@@ -5,15 +5,19 @@ import Contact from "../components/Contact";
 import Hero from "../components/Hero";
 import Portfolio from "../components/Portfolio";
 import Services from "../components/Services";
+import Process from "../components/Process";
+import Testimonial from "../components/Testimonial";
 
 const HomePage: React.FC = () => {
   return (
     <div>
       <Hero />
       <Services />
+      <Process/>
       <Portfolio />
       <About />
       <Blog />
+      <Testimonial/>
       <Contact />
     </div>
   );

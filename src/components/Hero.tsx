@@ -31,7 +31,7 @@ const Hero: React.FC = () => {
       id="home" 
       className="min-h-screen flex items-center justify-center relative overflow-hidden"
       style={{
-        background: `url('/src/assets/images/my.png')`,
+        background: `url('/src/public/images/my.png')`,
         backgroundSize: 'auto 100%',
         backgroundPosition: 'right',
         backgroundRepeat: 'no-repeat',

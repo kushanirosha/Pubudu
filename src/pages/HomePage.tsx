@@ -12,10 +12,11 @@ const HomePage: React.FC = () => {
   return (
     <div>
       <Hero />
+      <About />
       <Services />
       <Process/>
       <Portfolio />
-      <About />
+      
       <Blog />
       <Testimonial/>
       <Contact />

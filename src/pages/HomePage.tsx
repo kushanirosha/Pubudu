@@ -1,25 +1,35 @@
 import React from "react";
 import About from "../components/About";
-import Blog from "../components/Blog";
 import Contact from "../components/Contact";
 import Hero from "../components/Hero";
-import Portfolio from "../components/Portfolio";
-import Services from "../components/Services";
-import Process from "../components/Process";
 import Testimonial from "../components/Testimonial";
+import Projects from "../components/Projects";
+import FullScreenBlobs from "../components/gradientBlob";
 
 const HomePage: React.FC = () => {
   return (
-    <div>
-      <Hero />
-      <About />
-      <Services />
-      <Process/>
-      <Portfolio />
-      
-      <Blog />
-      <Testimonial/>
-      <Contact />
+    <div className="relative bg-gray-100">
+      {/* Background blobs (always visible) */}
+      <FullScreenBlobs />
+
+      {/* Main content on top */}
+      <div className="relative z-10">
+        <section>
+          <Hero />
+        </section>
+        <section>
+          <About />
+        </section>
+        <section>
+          <Testimonial />
+        </section>
+        <section>
+          <Projects />
+        </section>
+        <section>
+          <Contact />
+        </section>
+      </div>
     </div>
   );
 };

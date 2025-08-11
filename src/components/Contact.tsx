@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter } from 'lucide-react';
-import { useScrollAnimation } from '../hooks/useScrollAnimation';
+// If you actually want animation triggers, you can import the hook you intended here, e.g.:
+// import { useInView } from 'react-intersection-observer';
 
 const Contact: React.FC = () => {
-  const { ref, isVisible } = useScrollAnimation();
+  // Replace this with your actual visibility logic or remove if not needed
+  const [isVisible] = useState(true);
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -18,7 +21,6 @@ const Contact: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
     console.log('Form submitted:', formData);
   };
 
@@ -50,37 +52,29 @@ const Contact: React.FC = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-gray-50 dark:bg-gray-900">
+    <section id="contact" className="py-20 dark:bg-gray-900">
       <div className="container mx-auto px-6">
-        <div ref={ref} className={`text-center mb-16 transition-all duration-1000 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-        }`}>
+        <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
             Let's Work Together
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-            Have a project in mind? I'd love to hear about it. Let's discuss 
-            how we can bring your ideas to life.
+            Have a project in mind? I'd love to hear about it. Let's discuss how we can bring your ideas to life.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           {/* Contact Information */}
-          <div className={`transition-all duration-1000 ${
-            isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
-          }`}>
+          <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
             <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">
               Get In Touch
             </h3>
-            
             <div className="space-y-6 mb-8">
               {contactInfo.map((info, index) => (
                 <a
                   key={info.title}
                   href={info.href}
-                  className={`group flex items-center p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 ${
-                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
-                  }`}
+                  className={`group flex items-center p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
                   style={{ transitionDelay: `${index * 100 + 200}ms` }}
                 >
                   <div className="w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
@@ -123,8 +117,7 @@ const Contact: React.FC = () => {
                 Ready to Start Your Project?
               </h4>
               <p className="text-gray-600 dark:text-gray-400 mb-4">
-                Let's schedule a call to discuss your requirements and how I can help 
-                bring your vision to life.
+                Let's schedule a call to discuss your requirements and how I can help bring your vision to life.
               </p>
               <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300">
                 Schedule a Call
@@ -133,14 +126,11 @@ const Contact: React.FC = () => {
           </div>
 
           {/* Contact Form */}
-          <div className={`transition-all duration-1000 ${
-            isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
-          }`}>
+          <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
             <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
                 Send a Message
               </h3>
-
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -173,7 +163,6 @@ const Contact: React.FC = () => {
                   />
                 </div>
               </div>
-
               <div className="mb-6">
                 <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Subject
@@ -189,7 +178,6 @@ const Contact: React.FC = () => {
                   placeholder="What's this about?"
                 />
               </div>
-
               <div className="mb-6">
                 <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Message
@@ -205,7 +193,6 @@ const Contact: React.FC = () => {
                   placeholder="Tell me about your project..."
                 ></textarea>
               </div>
-
               <button
                 type="submit"
                 className="group w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 px-6 rounded-lg font-semibold hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"

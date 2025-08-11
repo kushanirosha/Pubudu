@@ -2,14 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
-import { useScrollProgress } from '../hooks/useScrollAnimation';
 import logo from '../public/images/logo.png';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { theme, toggleTheme } = useTheme();
-  const scrollProgress = useScrollProgress();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,7 +41,7 @@ const Header: React.FC = () => {
       <div className="fixed top-0 left-0 w-full h-1 bg-gray-200 dark:bg-gray-800 z-50">
         <div
           className="h-full bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 transition-all duration-300 ease-out"
-          style={{ width: `${scrollProgress}%` }}
+          // style={{ width: `${scrollProgress}%` }}
         />
       </div>
 

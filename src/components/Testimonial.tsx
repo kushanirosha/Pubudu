@@ -1,77 +1,108 @@
-import React from 'react';
+import React, { useState } from "react";
+import { FaUser } from "react-icons/fa";
+import bgImg from "../public/images/bg-wave.jpg";
 
-interface Testimonial {
-  name: string;
-  role: string;
-  content: string;
-  avatar: string;
-}
+const feedbacks = [
+  {
+    id: 1,
+    name: "Samantha",
+    designation: "CEO",
+    company: "Tech Corp",
+    feedback:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    image: "", // Put image URL here
+    initial: "S",
+  },
+  {
+    id: 2,
+    name: "William",
+    designation: "Manager",
+    company: "Business Inc",
+    feedback:
+      "Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.",
+    image: "",
+    initial: "W",
+  },
+  {
+    id: 3,
+    name: "Brian",
+    designation: "Designer",
+    company: "Creative Studio",
+    feedback:
+      "Aenean euismod elementum nisi quis eleifend quam adipiscing vitae proin sagittis.",
+    image: "",
+    initial: "B",
+  },
+  {
+    id: 4,
+    name: "Peter",
+    designation: "Developer",
+    company: "CodeLab",
+    feedback:
+      "Eget mi proin sed libero enim sed faucibus turpis in eu mi bibendum neque egestas congue quisque egestas diam.",
+    image: "",
+    initial: "P",
+  },
+];
 
-const Testimonial: React.FC = () => {
-  const testimonials: Testimonial[] = [
-    {
-      name: 'Sarah Johnson',
-      role: 'CEO, TechStart',
-      content: 'Working with this developer was an absolute pleasure. They delivered a stunning website that perfectly captured our brand vision.',
-      avatar: 'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=150'
-    },
-    {
-      name: 'Michael Chen',
-      role: 'Founder, E-Shop Pro',
-      content: 'The e-commerce platform exceeded our expectations. Sales increased by 150% within the first month after launch.',
-      avatar: 'https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=150'
-    },
-    {
-      name: 'Emily Rodriguez',
-      role: 'Marketing Director, Creative Co',
-      content: 'Professional, responsive, and incredibly talented. The website design perfectly reflects our creative agency brand.',
-      avatar: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=150'
-    },
-    {
-      name: 'David Thompson',
-      role: 'Restaurant Owner',
-      content: 'Our new website has brought in so many customers. The online ordering system works flawlessly and looks amazing.',
-      avatar: 'https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=150'
-    }
-  ];
+export default function FeedbackSection() {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const handleNext = () => {
+    setActiveIndex((prev) => (prev + 1) % feedbacks.length);
+  };
 
   return (
-    <section className="bg-gray-50 py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900">What my</h2>
-          <h3 className="text-xl text-blue-500 italic mt-[-1rem] mb-4">clients say</h3>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Don't just take my word for it - hear from satisfied clients about their experience
-          </p>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
-          {testimonials.map((testimonial, index) => (
+    <div className="flex items-center justify-center min-h-screen px-6 bg-cover bg-center" style={{ backgroundImage: `url(${bgImg})` }}>
+      {/* Left side carousel */}
+      <div className="flex gap-4 items-center">
+        {feedbacks.map((person, index) => {
+          const isActive = index === activeIndex;
+          return (
             <div
-              key={index}
-              className="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between min-h-[200px] animate-fade-in-up"
+              key={person.id}
+              onClick={() => setActiveIndex(index)}
+              className={`flex flex-col items-center justify-center rounded-lg bg-[#2E3453] text-white cursor-pointer transition-all duration-300 ${
+                isActive
+                  ? "h-96 w-40"
+                  : "h-48 w-28 opacity-60 hover:opacity-80"
+              }`}
             >
-              <div className="mb-6">
-                <p className="text-lg text-gray-600 italic leading-relaxed">"{testimonial.content}"</p>
-              </div>
-              <div className="flex items-center gap-4">
-                <img
-                  src={testimonial.avatar}
-                  alt={testimonial.name}
-                  className="w-12 h-12 rounded-full object-cover border-2 border-blue-500"
-                />
-                <div>
-                  <h4 className="text-base font-semibold text-gray-900 mb-1">{testimonial.name}</h4>
-                  <span className="text-sm text-gray-500">{testimonial.role}</span>
-                </div>
+              <div className="text-6xl font-bold">{person.initial}</div>
+              <div className="mt-4 flex flex-col items-center text-center">
+                <FaUser className="text-2xl mb-1" />
+                <p className="text-sm font-semibold">{person.name}</p>
+                <p className="text-xs opacity-80">{person.designation}</p>
               </div>
             </div>
-          ))}
-        </div>
+          );
+        })}
       </div>
-    </section>
-  );
-};
 
-export default Testimonial;
+      {/* Right side feedback */}
+      <div className="ml-10 max-w-lg">
+        <div className="flex items-center gap-2 mb-3">
+          <FaUser className="text-xl text-[#2E3453]" />
+          <div>
+            <p className="font-bold text-lg text-[#2E3453]">
+              {feedbacks[activeIndex].name}
+            </p>
+            <p className="text-sm text-gray-500">
+              {feedbacks[activeIndex].designation} /{" "}
+              {feedbacks[activeIndex].company}
+            </p>
+          </div>
+        </div>
+        <p className="text-gray-600 italic">
+          “{feedbacks[activeIndex].feedback}”
+        </p>
+        <button
+          onClick={handleNext}
+          className="mt-6 w-10 h-10 flex items-center justify-center bg-[#2E3453] rounded-full text-white"
+        >
+          →
+        </button>
+      </div>
+    </div>
+  );
+}

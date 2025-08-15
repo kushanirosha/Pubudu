@@ -32,7 +32,7 @@ const Packages: React.FC = () => {
 
   return (
     <section className="py-16 relative">
-      <h2 className="text-4xl md:text-5xl font-bold text-center text-gray-800 mb-8">
+      <h2 className="text-4xl md:text-5xl font-bold text-center text-gray-800 mb-8 lg:mt-14">
         Book Your Quotation
       </h2>
 

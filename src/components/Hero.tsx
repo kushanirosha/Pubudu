@@ -9,14 +9,14 @@ const HeroSection: React.FC = () => {
 
         <div className="text-left text-indigo-900">
           <p className="text-xl mb-4 font-light">I'am Pubudu Wijerathne</p>
-          <h1 className="md:text-[200px] text-7xl font-extrabold leading-none mb-4">
+          <h1 className="md:text-[230px] text-7xl font-extrabold leading-none mb-4">
             Port<br />Folio
           </h1>
           <p className="text-lg font-medium">Powered By Brand Beacon</p>
         </div>
 
         <div className=''>
-          <img src={lightImage} alt="Pubudu Wijerathne" className="h-screen" />
+          <img src={lightImage} alt="Pubudu Wijerathne" className="h-screen lg:ml-20 lg:mt-10" />
         </div>
       </div>
       <div className="absolute bottom-5 left-1/2 transform -translate-x-1/2 animate-bounce">

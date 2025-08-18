@@ -1,168 +1,87 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+// import { useNavigate } from "react-router-dom";
 
-interface BlogPost {
+interface Comment {
   id: number;
-  title: string;
-  excerpt: string;
-  image: string;
-  date: string;
-  category: string;
-  readTime: string;
+  text: string;
+  timestamp: string;
 }
 
 const BlogPage: React.FC = () => {
-  const [activeFilter, setActiveFilter] = useState<string>('All');
+  // const navigate = useNavigate();
+  const [comments, setComments] = useState<Comment[]>([]);
+  const [newComment, setNewComment] = useState("");
 
-  const blogPosts: BlogPost[] = [
-    {
-      id: 1,
-      title: 'The Future of Web Development in 2024',
-      excerpt: 'Exploring the latest trends and technologies shaping the future of web development.',
-      image: 'https://images.pexels.com/photos/270360/pexels-photo-270360.jpeg?auto=compress&cs=tinysrgb&w=800',
-      date: 'March 15, 2024',
-      category: 'Web Development',
-      readTime: '5 min read'
-    },
-    {
-      id: 2,
-      title: 'Building Responsive Layouts with CSS Grid',
-      excerpt: 'A comprehensive guide to creating flexible and responsive layouts using CSS Grid.',
-      image: 'https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800',
-      date: 'March 10, 2024',
-      category: 'CSS',
-      readTime: '8 min read'
-    },
-    {
-      id: 3,
-      title: 'React Best Practices for 2024',
-      excerpt: 'Essential React patterns and practices every developer should know.',
-      image: 'https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=800',
-      date: 'March 5, 2024',
-      category: 'React',
-      readTime: '6 min read'
-    },
-    {
-      id: 4,
-      title: 'Optimizing Website Performance',
-      excerpt: 'Tips and techniques to make your websites load faster and perform better.',
-      image: 'https://images.pexels.com/photos/34577/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=800',
-      date: 'February 28, 2024',
-      category: 'Performance',
-      readTime: '7 min read'
-    },
-    {
-      id: 5,
-      title: 'Understanding Modern JavaScript',
-      excerpt: 'A deep dive into ES6+ features and modern JavaScript development.',
-      image: 'https://images.pexels.com/photos/147413/twitter-facebook-together-exchange-of-information-147413.jpeg?auto=compress&cs=tinysrgb&w=800',
-      date: 'February 20, 2024',
-      category: 'JavaScript',
-      readTime: '10 min read'
-    },
-    {
-      id: 6,
-      title: 'Design Systems for Developers',
-      excerpt: 'How to create and maintain consistent design systems in your projects.',
-      image: 'https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg?auto=compress&cs=tinysrgb&w=800',
-      date: 'February 15, 2024',
-      category: 'Design',
-      readTime: '9 min read'
+  const handleCommentSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (newComment.trim()) {
+      const timestamp = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
+      setComments([...comments, { id: Date.now(), text: newComment, timestamp }]);
+      setNewComment("");
     }
-  ];
-
-  const categories: string[] = ['All', 'Web Development', 'CSS', 'React', 'JavaScript', 'Performance', 'Design'];
-
-  const filteredPosts = activeFilter === 'All'
-    ? blogPosts
-    : blogPosts.filter(post => post.category === activeFilter);
+  };
 
   return (
-    <div className="pt-20">
-      <section className="bg-gradient-to-br from-gray-50 to-white py-16 text-center">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div>
-            <h1 className="text-5xl font-bold text-gray-900 mb-6">Blog</h1>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Insights, tutorials, and thoughts on web development and design
+    <div className="py-20 bg-gray-50 min-h-screen">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        {/* Header with Image and Topic */}
+        <div className="mb-12">
+          <img
+            src="https://via.placeholder.com/1200x400"
+            alt="Blog Header"
+            className="w-full h-64 object-cover rounded-lg shadow-md"
+          />
+          <h1 className="text-4xl font-bold text-[#3c405b] mt-6 text-center">
+            Latest Blog Topic
+          </h1>
+        </div>
+
+        {/* Description Section (3/4 width) */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="lg:col-span-2">
+            <p className="text-gray-700 leading-relaxed">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+              dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+              proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+            <p className="text-gray-700 mt-6">
+              Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+              quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas
+              sit aspernatur aut odit aut fugit.
             </p>
           </div>
-        </div>
-      </section>
 
-      <section className="bg-gray-50 py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-center gap-4 mb-12 flex-wrap">
-            {categories.map(category => (
-              <button
-                key={category}
-                className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 border-2 border-gray-300 text-gray-600 hover:border-blue-500 hover:text-blue-500 ${
-                  activeFilter === category ? 'bg-blue-500 border-blue-500 text-white' : 'bg-transparent'
-                }`}
-                onClick={() => setActiveFilter(category)}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            {filteredPosts.map(post => (
-              <article
-                key={post.id}
-                className="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col hover:shadow-xl hover:-translate-y-1 transition-all duration-300 animate-fade-in-up"
-              >
-                <div className="relative w-full h-52 overflow-hidden">
-                  <img
-                    src={post.image}
-                    alt={post.title}
-                    className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                  />
-                  <div className="absolute top-4 left-4 bg-blue-500 text-white px-2 py-1 rounded text-xs font-semibold uppercase tracking-wide">
-                    {post.category}
-                  </div>
+          {/* Comment Section (1/4 width) */}
+          <div className="lg:col-span-1">
+            <h2 className="text-2xl font-semibold text-[#3c405b] mb-4">Comments</h2>
+            <div className="space-y-4 max-h-96 overflow-y-auto">
+              {comments.map((comment) => (
+                <div key={comment.id} className="bg-white p-4 rounded-lg shadow-sm">
+                  <p className="text-gray-700">{comment.text}</p>
+                  <p className="text-sm text-gray-500 mt-2">{comment.timestamp}</p>
                 </div>
-                <div className="p-6 flex flex-col flex-grow">
-                  <div className="flex justify-between items-center mb-4 text-sm text-gray-500">
-                    <span>{post.date}</span>
-                    <span>{post.readTime}</span>
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4 leading-tight">{post.title}</h3>
-                  <p className="text-gray-600 mb-6 flex-grow leading-relaxed">{post.excerpt}</p>
-                  <a
-                    href="#"
-                    className="inline-flex items-center gap-2 text-blue-500 font-medium hover:text-blue-700 transition-all duration-300 mt-auto"
-                  >
-                    Read More
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" className="transition-transform duration-300 group-hover:translate-x-1">
-                      <path d="M8.293 1.293a1 1 0 0 1 1.414 0l6 6a1 1 0 0 1 0 1.414l-6 6a1 1 0 0 1-1.414-1.414L12.586 9H2a1 1 0 0 1 0-2h10.586L8.293 2.707a1 1 0 0 1 0-1.414z"/>
-                    </svg>
-                  </a>
-                </div>
-              </article>
-            ))}
-          </div>
-
-          <div className="flex flex-col md:flex-row justify-center items-center gap-4">
-            <button className="px-6 py-3 rounded-lg border-2 border-gray-300 text-gray-600 hover:border-blue-500 hover:text-blue-500 transition-all duration-300">
-              Previous
-            </button>
-            <div className="flex gap-2">
-              <button className="w-10 h-10 rounded border-2 border-blue-500 bg-blue-500 text-white font-medium transition-all duration-300">
-                1
-              </button>
-              <button className="w-10 h-10 rounded border-2 border-gray-300 text-gray-600 hover:border-blue-500 hover:text-blue-500 transition-all duration-300">
-                2
-              </button>
-              <button className="w-10 h-10 rounded border-2 border-gray-300 text-gray-600 hover:border-blue-500 hover:text-blue-500 transition-all duration-300">
-                3
-              </button>
+              ))}
             </div>
-            <button className="px-6 py-3 rounded-lg border-2 border-gray-300 text-gray-600 hover:border-blue-500 hover:text-blue-500 transition-all duration-300">
-              Next
-            </button>
+            <form onSubmit={handleCommentSubmit} className="mt-6">
+              <textarea
+                value={newComment}
+                onChange={(e) => setNewComment(e.target.value)}
+                placeholder="Write a comment..."
+                className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3c405b]"
+                rows={4}
+              />
+              <button
+                type="submit"
+                className="mt-2 px-4 py-2 bg-[#3c405b] text-white rounded-full hover:bg-[#2E3453] transition-colors"
+              >
+                Submit
+              </button>
+            </form>
           </div>
         </div>
-      </section>
+
+      </div>
     </div>
   );
 };

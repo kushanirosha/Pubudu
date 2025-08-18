@@ -52,13 +52,13 @@ const Contact: React.FC = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 dark:bg-gray-900">
-      <div className="container mx-auto px-6">
+    <section id="contact" className="py-20">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-[#3c405b] dark:text-white mb-4">
             Let's Work Together
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
             Have a project in mind? I'd love to hear about it. Let's discuss how we can bring your ideas to life.
           </p>
         </div>

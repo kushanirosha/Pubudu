@@ -1,17 +1,13 @@
 import React from "react";
-import {
-  FaHotel,
-  FaCar,
-  FaHamburger,
-  FaPlane,
-  FaToilet,
-  FaTooth,
-  FaLaptop,
-  FaPaw,
-  FaLeaf
-} from "react-icons/fa";
+import { FaHotel, FaCar, FaHamburger, FaPlane, FaToilet, FaTooth, FaLaptop, FaPaw, FaLeaf } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
-const projects = [
+interface Project {
+  name: string;
+  icon: JSX.Element;
+}
+
+const projects: Project[] = [
   { name: "Hospitality", icon: <FaHotel /> },
   { name: "Transport", icon: <FaCar /> },
   { name: "Food", icon: <FaHamburger /> },
@@ -23,47 +19,42 @@ const projects = [
   { name: "Ayurvedic", icon: <FaLeaf /> },
 ];
 
-export default function PortfolioSection() {
+const PortfolioSection: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
-    <section className="py-16 ">
-      <div className="max-w-6xl mx-auto px-6 text-center">
-        {/* Heading */}
-        <h2 className="text-3xl font-bold text-gray-800 mb-2">
+    <section className="py-16">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        <h2 className="text-4xl font-bold text-[#3c405b] mb-2 text-center">
           Explore My Projects
         </h2>
-        <p className="text-gray-500 mb-12 max-w-2xl mx-auto">
+        <p className="text-gray-600 mb-12 max-w-2xl mx-auto text-center">
           You’ll see examples of how I help clients bring their online vision to life.
         </p>
-
-        {/* Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-10">
           {projects.map((project, idx) => (
             <div
               key={idx}
-              className="group relative bg-white rounded-xl shadow-sm hover:shadow-xl border border-gray-100 p-8 flex flex-col items-center justify-center transition-all duration-300 hover:-translate-y-2"
+              onClick={() => navigate(`/projects/${project.name.toLowerCase().replace(/ /g, '-')}`)}
+              className="group relative bg-white rounded-xl shadow-sm hover:shadow-xl border border-gray-100 p-8 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:-translate-y-2"
             >
-              {/* Icon */}
-              <div className="text-4xl text-[#2E3453] mb-4 group-hover:scale-110 transition-transform duration-300">
-                {project.icon}
+              <div className="bg-[#3c405b] p-4 rounded-xl">
+                <div className="text-4xl text-white group-hover:scale-110 transition-transform duration-300">
+                  {project.icon}
+                </div>
               </div>
-              {/* Name */}
-              <h3 className="text-lg font-semibold text-gray-800">
+              <h3 className="text-lg font-semibold text-gray-600 mt-3">
                 {project.name}
               </h3>
-
-              {/* Modern hover overlay */}
               <div className="absolute inset-0 rounded-xl bg-[#2E3453] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                 <p className="text-white font-medium">View Details</p>
               </div>
             </div>
           ))}
-
-          {/* Empty placeholders for layout */}
-          <div className="bg-white rounded-xl border border-gray-100" />
-          <div className="bg-white rounded-xl border border-gray-100" />
-          <div className="bg-white rounded-xl border border-gray-100" />
         </div>
       </div>
     </section>
   );
-}
+};
+
+export default PortfolioSection;

@@ -16,8 +16,8 @@ const Header: React.FC = () => {
   const navItems = [
     { name: 'Home', href: '/', isRoute: true },
     { name: 'Service', href: '/services', isRoute: true },
-    { name: 'Project', href: '/projects', isRoute: true },
-    { name: 'Feedback', href: '/feedback', isRoute: true },
+    { name: 'Project', href: '/projects/all', isRoute: true },
+    { name: 'Blog', href: '/blog', isRoute: true },
     { name: 'About Me', href: '/about', isRoute: true },
   ];
 
@@ -25,7 +25,7 @@ const Header: React.FC = () => {
     <header
       className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 flex justify-center }`}
     >
-      <nav className="bg-white rounded-b-2xl shadow-md px-6 py-4 flex items-center justify-between w-[90%] max-w-6xl">
+      <nav className="bg-white rounded-b-2xl shadow-md px-6 py-4 flex items-center justify-between w-[80%] max-w-7xl">
         {/* Logo */}
         <div className="flex items-center space-x-3">
           <img src={logo} alt="Logo" className="h-10 w-auto" />
@@ -39,8 +39,8 @@ const Header: React.FC = () => {
                 key={item.name}
                 to={item.href}
                 className={({ isActive }) =>
-                  `text-gray-700 font-medium hover:text-gray-900 transition-colors ${
-                    isActive ? 'text-black' : ''
+                  `text-[#3c405b] font-medium hover:text-blue-500 transition-colors ${
+                    isActive ? 'text-blue-500' : ''
                   }`
                 }
               >

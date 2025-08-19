@@ -47,40 +47,56 @@ const AboutPage: React.FC = () => {
     <div className="pt-20">
       <section className="bg-gradient-to-br from-gray-50 to-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 text-center lg:text-left">
-            <div>
-              <h1 className="text-5xl font-bold text-gray-900 mb-6">About Me</h1>
-              <p className="text-lg text-gray-600 leading-relaxed mb-6">
-                I'm a passionate web developer and designer with over 5 years of experience 
-                creating digital solutions that make a difference. I believe in the power of 
-                clean code, thoughtful design, and user-centered experiences.
-              </p>
-              <p className="text-lg text-gray-600 leading-relaxed mb-6">
-                When I'm not coding, you'll find me exploring new technologies, contributing 
-                to open-source projects, or sharing knowledge with the developer community. 
-                I'm always excited to take on new challenges and help businesses succeed online.
-              </p>
-              <div className="flex flex-wrap justify-center lg:justify-start gap-8 mt-8">
-                <div className="flex flex-col items-center lg:items-start">
-                  <span className="text-3xl font-bold text-blue-500">50+</span>
-                  <span className="text-sm text-gray-500 uppercase tracking-wide mt-1">Projects Completed</span>
-                </div>
-                <div className="flex flex-col items-center lg:items-start">
-                  <span className="text-3xl font-bold text-blue-500">5+</span>
-                  <span className="text-sm text-gray-500 uppercase tracking-wide mt-1">Years Experience</span>
-                </div>
-                <div className="flex flex-col items-center lg:items-start">
-                  <span className="text-3xl font-bold text-blue-500">25+</span>
-                  <span className="text-sm text-gray-500 uppercase tracking-wide mt-1">Happy Clients</span>
-                </div>
-              </div>
-            </div>
-            <div className="flex justify-center items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+            {/* Left Side - Image */}
+            <div className="flex justify-center">
               <img
-                src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800"
-                alt="Developer at work"
-                className="w-full max-w-md h-[500px] object-cover rounded-lg shadow-xl border-4 border-blue-500"
+                src="https://via.placeholder.com/400x500"
+                alt="Profile"
+                className="w-full max-w-sm h-[500px] object-cover rounded-2xl shadow-xl"
               />
+            </div>
+
+            {/* Right Side - Content */}
+            <div className="text-left">
+              <h1 className="text-4xl font-bold text-gray-900 mb-6">About Me</h1>
+
+              <h2 className="text-2xl font-semibold text-gray-800">
+                Pubudu Wijerathne
+              </h2>
+              <p className="text-gray-500 mb-4">Senior Graphic Designer</p>
+
+              <p className="text-lg text-gray-600 leading-relaxed mb-4">
+                Hello! I'm a passionate Senior Graphic Designer with a deep love for solving
+                design challenges. For the past six years, I've had the pleasure of helping
+                companies build their brand and connect with customers.
+              </p>
+              <p className="text-lg text-gray-600 leading-relaxed mb-4">
+                My experience includes six years in the design field, with two of those years
+                spent as part of the creative team at Falcon Media. I am committed to delivering
+                high-quality, thoughtful design solutions that are not only aesthetically pleasing
+                but also effective in achieving business objectives.
+              </p>
+              <p className="text-lg text-gray-600 leading-relaxed mb-6">
+                I'm excited to hear about your project and discuss how we can bring your ideas to life.
+              </p>
+
+              {/* Personal Details */}
+              <div className="space-y-2 text-gray-700 mb-6">
+                <p><span className="font-semibold">Name :</span> Pubudu Wijerathne</p>
+                <p><span className="font-semibold">Age :</span> 25</p>
+                <p><span className="font-semibold">Address :</span> No.59/2, Ruwanpura, Werellagama, Kandy, Sri Lanka</p>
+                <p><span className="font-semibold">Postal Code :</span> 20048</p>
+              </div>
+
+              {/* Download CV Button */}
+              <a
+                href="#"
+                className="inline-block px-6 py-3 bg-[#3c405b] text-white rounded-lg shadow-md hover:bg-[#2E3453] transition-colors"
+              >
+                Download CV
+              </a>
             </div>
           </div>
         </div>

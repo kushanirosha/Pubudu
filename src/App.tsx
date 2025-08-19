@@ -4,6 +4,7 @@ import Footer from "./layouts/Footer";
 import { BrowserRouter } from "react-router-dom";
 import RoutesComponent from "./routes/route";
 
+
 const App: React.FC = () => {
   return (
     <ThemeProvider>

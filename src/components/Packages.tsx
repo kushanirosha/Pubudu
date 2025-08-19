@@ -31,7 +31,7 @@ const Packages: React.FC = () => {
   const [active, setActive] = useState("business");
 
   return (
-    <section className="py-16 relative">
+    <section className="py-16 relative bg-gray-100">
       <h2 className="text-4xl md:text-5xl font-bold text-center text-gray-800 mb-8 lg:mt-14">
         Book Your Quotation
       </h2>

@@ -9,7 +9,7 @@ const HeroSection: React.FC = () => {
 
         <div className="text-left text-[#3c405b]">
           <p className="text-xl mb-4 font-light">I'am Pubudu Wijerathne</p>
-          <h1 className="md:text-[230px] text-7xl font-extrabold leading-none mb-4">
+          <h1 className="md:text-[270px] text-7xl font-extrabold leading-none mb-1">
             Port<br />Folio
           </h1>
           <p className="text-lg font-medium">Powered By Brand Beacon</p>

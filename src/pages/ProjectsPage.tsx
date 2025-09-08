@@ -37,7 +37,7 @@ const ProjectDetailsPage: React.FC = () => {
   };
 
   return (
-    <div className="py-20 bg-gray-100">
+    <div className="py-20 bg-gray-100 min-h-screen">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <h2 className="text-4xl font-bold text-[#3c405b] mb-6 text-center">
           {selectedProject ? selectedProject.name : "All Projects"}

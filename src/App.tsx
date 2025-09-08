@@ -1,4 +1,3 @@
-import { ThemeProvider } from "./contexts/ThemeContext";
 import Header from "./layouts/Header";
 import Footer from "./layouts/Footer";
 import { BrowserRouter } from "react-router-dom";
@@ -6,6 +5,7 @@ import RoutesComponent from "./routes/route";
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import FullScreenBlobs from "./components/gradientBlob";
 
 
 const App: React.FC = () => {
@@ -17,9 +17,10 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <ThemeProvider>
+   
       <BrowserRouter>
         <div className="relative min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
+           <FullScreenBlobs />
           <Header />
 
           {/* Scrollable Content */}
@@ -33,7 +34,7 @@ const App: React.FC = () => {
           </div>
         </div>
       </BrowserRouter>
-    </ThemeProvider>
+    
   );
 };
 

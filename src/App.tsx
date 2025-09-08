@@ -3,9 +3,19 @@ import Header from "./layouts/Header";
 import Footer from "./layouts/Footer";
 import { BrowserRouter } from "react-router-dom";
 import RoutesComponent from "./routes/route";
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 
 const App: React.FC = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 800, 
+      once: true,    
+    });
+  }, []);
+
   return (
     <ThemeProvider>
       <BrowserRouter>

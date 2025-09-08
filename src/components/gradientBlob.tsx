@@ -1,4 +1,3 @@
-// src/components/FullScreenBlobs.tsx
 import React from "react";
 
 const blobs = [
@@ -19,7 +18,7 @@ const FullScreenBlobs: React.FC = () => {
             left: blob.left,
             width: blob.size,
             height: blob.size,
-            background: `radial-gradient(circle at center, ${blob.color}, rgba(255,255,255,0) 80%)`,
+            background: `radial-gradient(circle at center, ${blob.color}, rgba(255,255,255,0) 90%)`,
           }}
         />
       ))}

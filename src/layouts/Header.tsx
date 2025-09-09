@@ -1,89 +1,98 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { Menu, X } from "lucide-react"; // ✅ import icons
+import { Menu, X } from "lucide-react";
 import logo from "../public/images/logo.png";
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // ✅ added state
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const navItems = [
-    { name: "Home", href: "/", isRoute: true },
-    { name: "Service", href: "/services", isRoute: true },
-    { name: "Project", href: "/projects/all", isRoute: true },
-    { name: "Blog", href: "/blog", isRoute: true },
-    { name: "About Me", href: "/about", isRoute: true },
+    { name: "Home", href: "/" },
+    { name: "Service", href: "/services" },
+    { name: "Project", href: "/projects/all" },
+    { name: "Blog", href: "/blog" },
+    { name: "About Me", href: "/about" },
   ];
 
   return (
-    <header
-      className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 flex justify-center ${
-        isScrolled ? "bg-white/90 shadow-md backdrop-blur" : "bg-transparent"
-      }`}
-    >
-      <nav className="rounded-b-2xl px-6 py-4 flex items-center justify-between w-[90%] max-w-7xl">
+    <header className="fixed top-0 left-1/2 transform -translate-x-1/2 w-[85%] max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-50 transition-all duration-300">
+      <nav
+        className={`flex items-center justify-between bg-transparent backdrop-blur-md rounded-b-2xl shadow-md px-6 py-4 md:px-10 transition-all duration-300 ${
+          isScrolled ? "shadow-lg" : "shadow-md"
+        }`}
+      >
         {/* Logo */}
-        <div className="flex items-center space-x-3">
+        <div className="flex items-center space-x-2">
           <img src={logo} alt="Logo" className="h-10 w-auto" />
         </div>
 
-        {/* Desktop Navigation */}
+        {/* Desktop Nav */}
         <div className="hidden md:flex items-center space-x-8">
-          {navItems.map((item) =>
-            item.isRoute ? (
-              <NavLink
-                key={item.name}
-                to={item.href}
-                className={({ isActive }) =>
-                  `text-[#3c405b] font-medium hover:text-blue-500 transition-colors ${
-                    isActive ? "text-blue-500" : ""
-                  }`
-                }
-              >
-                {item.name}
-              </NavLink>
-            ) : null
-          )}
+          {navItems.map((item) => (
+            <NavLink
+              key={item.name}
+              to={item.href}
+              className={({ isActive }) =>
+                `relative group font-medium transition-colors ${
+                  isActive ? "text-blue-800" : "text-[#3c405b] hover:text-blue-800"
+                }`
+              }
+            >
+              {({ isActive }) => (
+                <>
+                  {item.name}
+                  {/* Underline */}
+                  <span
+                    className={`absolute left-0 -bottom-1 h-0.5 bg-blue-800 transition-all duration-300 ${
+                      window.location.pathname === item.href ? "w-full" : "w-0 group-hover:w-full"
+                    }`}
+                  ></span>
+                </>
+              )}
+            </NavLink>
+          ))}
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Toggle */}
         <button
-          className="md:hidden text-[#3c405b] hover:text-blue-500"
+          className="md:hidden text-[#3c405b] hover:text-blue-800"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
-
-        {/* Mobile Dropdown Menu */}
-        {isMenuOpen && (
-          <div className="absolute top-16 left-0 w-full bg-white shadow-md rounded-b-2xl md:hidden flex flex-col items-center py-4 space-y-4">
-            {navItems.map((item) =>
-              item.isRoute ? (
-                <NavLink
-                  key={item.name}
-                  to={item.href}
-                  onClick={() => setIsMenuOpen(false)}
-                  className={({ isActive }) =>
-                    `text-[#3c405b] font-medium text-lg ${
-                      isActive ? "text-blue-600" : "hover:text-blue-500"
-                    }`
-                  }
-                >
-                  {item.name}
-                </NavLink>
-              ) : null
-            )}
-          </div>
-        )}
       </nav>
+
+      {/* Mobile Dropdown */}
+      {isMenuOpen && (
+        <div className="mt-2 bg-white shadow-lg rounded-2xl p-5 flex flex-col items-center space-y-4 md:hidden">
+          {navItems.map((item) => (
+            <NavLink
+              key={item.name}
+              to={item.href}
+              onClick={() => setIsMenuOpen(false)}
+              className={({ isActive }) =>
+                `relative font-medium text-lg transition-colors ${
+                  isActive ? "text-blue-800" : "text-[#3c405b] hover:text-blue-800"
+                }`
+              }
+            >
+              {item.name}
+              <span
+                className={`absolute left-0 -bottom-1 h-0.5 bg-blue-800 transition-all duration-300 ${
+                  window.location.pathname === item.href ? "w-full" : "w-0 group-hover:w-full"
+                }`}
+              ></span>
+            </NavLink>
+          ))}
+        </div>
+      )}
     </header>
   );
 };

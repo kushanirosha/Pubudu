@@ -19,12 +19,12 @@ const App: React.FC = () => {
   return (
    
       <BrowserRouter>
-        <div className="relative min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
+        <div className="relative min-h-screen transition-colors duration-300">
            <FullScreenBlobs />
           <Header />
 
           {/* Scrollable Content */}
-          <main className="relative z-10 overflow-y-auto max-h-screen pb-80">
+          <main className="relative z-10 pb-72">
             <RoutesComponent />
           </main>
 

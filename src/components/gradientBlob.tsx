@@ -8,7 +8,7 @@ const blobs = [
 
 const FullScreenBlobs: React.FC = () => {
   return (
-    <div className="fixed inset-0 h-screen w-full overflow-hidden pointer-events-none z-0">
+    <div className="fixed inset-0 h-screen w-full overflow-hidden pointer-events-none z-20">
       {blobs.map((blob, i) => (
         <div
           key={i}

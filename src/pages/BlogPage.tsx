@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { blogs, Blog } from "../utils/Blogdata";
 
 interface Comment {
   id: number;
@@ -6,53 +7,9 @@ interface Comment {
   timestamp: string;
 }
 
-interface Blog {
-  id: number;
-  title: string;
-  image: string;
-  date: string;
-  reactions: number;
-  comments: number;
-  description: string;
-}
-
 const BlogPage: React.FC = () => {
   const [comments, setComments] = useState<Comment[]>([]);
   const [newComment, setNewComment] = useState("");
-
-  // Example blogs (newest blog first)
-  const blogs: Blog[] = [
-    {
-      id: 1,
-      title: "The Future of Web Development",
-      image: "https://via.placeholder.com/1200x400",
-      date: "Aug 15, 2025",
-      reactions: 120,
-      comments: 15,
-      description:
-        "Web development is rapidly evolving with modern frameworks, AI integration, and cloud-native solutions leading the way...",
-    },
-    {
-      id: 2,
-      title: "Top 10 JavaScript Frameworks in 2025",
-      image: "https://via.placeholder.com/1200x400",
-      date: "Aug 10, 2025",
-      reactions: 95,
-      comments: 22,
-      description:
-        "JavaScript frameworks have exploded in popularity, providing developers with powerful tools for faster and scalable apps...",
-    },
-    {
-      id: 3,
-      title: "Why TypeScript is Taking Over",
-      image: "https://via.placeholder.com/1200x400",
-      date: "Aug 5, 2025",
-      reactions: 150,
-      comments: 30,
-      description:
-        "TypeScript has become a standard for modern projects, improving maintainability and reducing bugs with strong typing...",
-    },
-  ];
 
   // Default: show the newest blog
   const [selectedBlog, setSelectedBlog] = useState<Blog>(blogs[0]);
@@ -141,13 +98,12 @@ const BlogPage: React.FC = () => {
             <h2 className="text-2xl font-semibold text-[#3c405b] mb-6">
               All Blogs
             </h2>
-            <div className="space-y-6">
+            <div className="max-h-[calc(100vh-200px)] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
               {blogs.map((blog) => (
                 <div
                   key={blog.id}
-                  className={`bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer ${
-                    selectedBlog.id === blog.id ? "ring-2 ring-[#3c405b]" : ""
-                  }`}
+                  className={`bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer mb-6 ${selectedBlog.id === blog.id ? "ring-2 ring-[#3c405b]" : ""
+                    }`}
                   onClick={() => {
                     setSelectedBlog(blog);
                     setComments([]); // reset comments per blog (optional)
@@ -159,9 +115,7 @@ const BlogPage: React.FC = () => {
                     className="w-full h-32 object-cover"
                   />
                   <div className="p-4">
-                    <h3 className="text-lg font-bold text-[#3c405b]">
-                      {blog.title}
-                    </h3>
+                    <h3 className="text-lg font-bold text-[#3c405b]">{blog.title}</h3>
                     <p className="text-sm text-gray-500 mt-1">{blog.date}</p>
                     <div className="flex justify-between text-sm text-gray-600 mt-3">
                       <span>👍 {blog.reactions}</span>
@@ -172,6 +126,7 @@ const BlogPage: React.FC = () => {
               ))}
             </div>
           </div>
+
         </div>
       </div>
     </div>

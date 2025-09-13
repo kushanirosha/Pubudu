@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter } from 'lucide-react';
-// If you actually want animation triggers, you can import the hook you intended here, e.g.:
-// import { useInView } from 'react-intersection-observer';
+import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { FaBehance, FaPinterest } from "react-icons/fa";
+
 
 const Contact: React.FC = () => {
-  // Replace this with your actual visibility logic or remove if not needed
   const [isVisible] = useState(true);
 
   const [formData, setFormData] = useState({
@@ -28,27 +27,26 @@ const Contact: React.FC = () => {
     {
       icon: Mail,
       title: 'Email',
-      value: 'alex.rivera@example.com',
-      href: 'mailto:alex.rivera@example.com'
+      value: 'pubuduw@brandsbeacon.com',
+      href: 'mailto:pubuduw@brandsbeacon.com'
     },
     {
       icon: Phone,
       title: 'Phone',
-      value: '+1 (555) 123-4567',
-      href: 'tel:+15551234567'
+      value: '+94 75 992 9718',
+      href: 'tel:+94759929718'
     },
     {
       icon: MapPin,
       title: 'Location',
-      value: 'San Francisco, CA',
+      value: 'Kandy, Sri Lanka',
       href: '#'
     }
   ];
 
   const socialLinks = [
-    { icon: Github, href: '#', label: 'GitHub' },
-    { icon: Linkedin, href: '#', label: 'LinkedIn' },
-    { icon: Twitter, href: '#', label: 'Twitter' }
+    { icon: FaBehance, href: "#", label: "Behance" },
+    { icon: FaPinterest, href: "#", label: "Pinterest" },
   ];
 
   return (
@@ -77,11 +75,11 @@ const Contact: React.FC = () => {
                   className={`group flex items-center p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
                   style={{ transitionDelay: `${index * 100 + 200}ms` }}
                 >
-                  <div className="w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-14 h-14 bg-gradient-to-r from-[#56575f] to-[#3c405b] rounded-xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
                     <info.icon className="h-7 w-7 text-white" />
                   </div>
                   <div>
-                    <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+                    <h4 className="text-lg font-semibold text-[#3c405b] dark:text-white mb-1">
                       {info.title}
                     </h4>
                     <p className="text-gray-600 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
@@ -93,8 +91,8 @@ const Contact: React.FC = () => {
             </div>
 
             {/* Social Links */}
-            <div className="border-t border-gray-200 dark:border-gray-700 pt-8">
-              <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+            <div className="border-t-2 border-gray-200 dark:border-gray-700 pt-8">
+              <h4 className="text-xl font-semibold text-[#3c405b] dark:text-white mb-4">
                 Follow Me
               </h4>
               <div className="flex space-x-4">
@@ -119,7 +117,10 @@ const Contact: React.FC = () => {
               <p className="text-gray-600 dark:text-gray-400 mb-4">
                 Let's schedule a call to discuss your requirements and how I can help bring your vision to life.
               </p>
-              <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300">
+              <button
+                onClick={() => window.location.href = "tel:+94759929718"}
+                className="bg-[#2E3453] text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300"
+              >
                 Schedule a Call
               </button>
             </div>
@@ -128,7 +129,7 @@ const Contact: React.FC = () => {
           {/* Contact Form */}
           <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
             <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+              <h3 className="text-2xl font-bold text-[#3c405b] dark:text-white mb-6">
                 Send a Message
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
@@ -143,7 +144,7 @@ const Contact: React.FC = () => {
                     value={formData.name}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all duration-200"
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:outline-none focus:ring-blue-600 transition-all duration-200"
                     placeholder="Your name"
                   />
                 </div>
@@ -158,7 +159,7 @@ const Contact: React.FC = () => {
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all duration-200"
+                    className="w-full px-4 py-3 border bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all duration-200"
                     placeholder="your@email.com"
                   />
                 </div>
@@ -174,7 +175,7 @@ const Contact: React.FC = () => {
                   value={formData.subject}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all duration-200"
+                  className="w-full px-4 py-3 border dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all duration-200"
                   placeholder="What's this about?"
                 />
               </div>
@@ -189,13 +190,13 @@ const Contact: React.FC = () => {
                   onChange={handleInputChange}
                   required
                   rows={6}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all duration-200 resize-none"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all duration-200 resize-none"
                   placeholder="Tell me about your project..."
                 ></textarea>
               </div>
               <button
                 type="submit"
-                className="group w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 px-6 rounded-lg font-semibold hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
+                className="group w-full bg-[#2E3453] text-white py-4 px-6 rounded-lg font-semibold hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
               >
                 <span className="flex items-center justify-center space-x-2">
                   <span>Send Message</span>

@@ -3,63 +3,47 @@ import { Facebook, Instagram, Linkedin } from "lucide-react";
 
 const Footer: React.FC = () => {
   return (
-    <footer
-      className="
-        fixed bottom-0 left-0 right-0 z-50
-        w-full h-80
-        bg-[#3c405b] text-white
-      "
-    >
-      <div className="h-full max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between">
-        {/* Left: Heading + socials + powered by */}
-        <div className="flex flex-col gap-6">
-          <h2 className="text-4xl md:text-5xl font-bold leading-none">Let’s talk</h2>
-
-          <div className="flex space-x-5">
+    <footer className="bg-[#3c405b] text-gray-200 ">
+      <div className="max-w-7xl mx-auto px-6 pt-24 pb-7 text-center flex flex-col items-center">
+        
+        {/* Social Icons */}
+        <div className="flex space-x-6 mb-6">
+          {[
+            { href: "#", Icon: Facebook, label: "Facebook" },
+            { href: "#", Icon: Instagram, label: "Instagram" },
+            { href: "#", Icon: Linkedin, label: "LinkedIn" },
+          ].map(({ href, Icon, label }) => (
             <a
-              href="#"
-              className="w-12 h-12 rounded-full border border-white flex items-center justify-center hover:bg-white hover:text-[#3c405b] transition"
-              aria-label="Facebook"
+              key={label}
+              href={href}
+              aria-label={label}
+              className="w-12 h-12 rounded-full border border-gray-400 flex items-center justify-center text-gray-200 hover:bg-white hover:text-[#3c405b] transition-colors transform hover:-translate-y-1 duration-300"
             >
-              <Facebook className="w-6 h-6" />
+              <Icon className="w-6 h-6" />
             </a>
-            <a
-              href="#"
-              className="w-12 h-12 rounded-full border border-white flex items-center justify-center hover:bg-white hover:text-[#3c405b] transition"
-              aria-label="Instagram"
-            >
-              <Instagram className="w-6 h-6" />
-            </a>
-            <a
-              href="#"
-              className="w-12 h-12 rounded-full border border-white flex items-center justify-center hover:bg-white hover:text-[#3c405b] transition"
-              aria-label="LinkedIn"
-            >
-              <Linkedin className="w-6 h-6" />
-            </a>
-          </div>
-
-          <p className="text-gray-300">Powered by Brand Beacon</p>
+          ))}
         </div>
 
-        {/* Right: Address + email + phone */}
-        <div className="text-gray-200 text-right space-y-3 hidden md:block">
-          <p>
-            No.59/2,<br />
-            Ruwanpura, Werellagama<br />
-            Kandy, Sri Lanka
-          </p>
+        {/* Contact Info */}
+        <div className="space-y-2 text-gray-300 mb-8">
+          <p>No.59/2, Ruwanpura, Werellagama, Kandy, Sri Lanka</p>
           <p>
             <a href="mailto:sheyno.graphics01@gmail.com" className="hover:underline">
               sheyno.graphics01@gmail.com
-            </a><br />
+            </a>{" "}
+            |{" "}
             <a href="mailto:infobrandbeacon@gmail.com" className="hover:underline">
               infobrandbeacon@gmail.com
             </a>
           </p>
+          <p>+94 75 992 9718 | +94 78 473 7746</p>
+        </div>
+
+        {/* Bottom Note */}
+        <div className="border-t border-white pt-4 w-full text-sm text-gray-400">
           <p>
-            +94 75 992 9718<br />
-            +94 78 473 7746
+            © {new Date().getFullYear()} All Rights Reserved. Powered by{" "}
+            <span className="text-white font-medium">Brand Beacon</span>
           </p>
         </div>
       </div>

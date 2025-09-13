@@ -1,4 +1,3 @@
-// src/components/FullScreenBlobs.tsx
 import React from "react";
 
 const blobs = [
@@ -9,7 +8,7 @@ const blobs = [
 
 const FullScreenBlobs: React.FC = () => {
   return (
-    <div className="fixed inset-0 h-screen w-full overflow-hidden pointer-events-none z-0">
+    <div className="fixed inset-0 h-screen w-full overflow-hidden pointer-events-none z-20">
       {blobs.map((blob, i) => (
         <div
           key={i}
@@ -19,7 +18,7 @@ const FullScreenBlobs: React.FC = () => {
             left: blob.left,
             width: blob.size,
             height: blob.size,
-            background: `radial-gradient(circle at center, ${blob.color}, rgba(255,255,255,0) 80%)`,
+            background: `radial-gradient(circle at center, ${blob.color}, rgba(255,255,255,0) 90%)`,
           }}
         />
       ))}

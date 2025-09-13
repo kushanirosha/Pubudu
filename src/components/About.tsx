@@ -9,7 +9,7 @@ import Lr from '../public/images/Lr.png';
 
 const AboutSection = () => {
   return (
-    <div className="flex items-center justify-between min-h-screen max-w-7xl mx-auto px-6 lg:px-12">
+    <div className="relative z-20 flex items-center justify-between min-h-screen max-w-7xl mx-auto px-6 lg:px-12">
       {/* Decorative Image Section */}
       <div className="w-1/2 flex items-center justify-center relative">
         

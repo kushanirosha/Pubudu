@@ -66,7 +66,7 @@ const Contact: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           {/* Contact Information */}
           <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
-            <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">
+            <h3 className="text-3xl font-bold text-[#3c405b] dark:text-white mb-8">
               Get In Touch
             </h3>
             <div className="space-y-6 mb-8">

@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { blogs, Blog } from "../utils/Blogdata";
+import React, { useEffect, useState } from "react";
+import { blogs as initialBlogs, Blog } from "../utils/Blogdata";
+import SubscribeSection from "../components/subscribe";
 
 interface Comment {
   id: number;
@@ -8,8 +9,16 @@ interface Comment {
 }
 
 const BlogPage: React.FC = () => {
+  useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
+  
   const [comments, setComments] = useState<Comment[]>([]);
   const [newComment, setNewComment] = useState("");
+  const [newEmail, setNewEmail] = useState("");
+
+  // Store blogs with local like state
+  const [blogs, setBlogs] = useState<Blog[]>(initialBlogs);
 
   // Default: show the newest blog
   const [selectedBlog, setSelectedBlog] = useState<Blog>(blogs[0]);
@@ -28,8 +37,23 @@ const BlogPage: React.FC = () => {
     }
   };
 
+  const handleLike = (blogId: number) => {
+    const updatedBlogs = blogs.map((blog) =>
+      blog.id === blogId ? { ...blog, reactions: blog.reactions + 1 } : blog
+    );
+    setBlogs(updatedBlogs);
+
+    // If current blog is the liked one, also update selectedBlog
+    if (selectedBlog.id === blogId) {
+      setSelectedBlog({
+        ...selectedBlog,
+        reactions: selectedBlog.reactions + 1,
+      });
+    }
+  };
+
   return (
-    <div className="py-28 bg-gray-50 min-h-screen">
+    <div className="pt-28 bg-gray-50 min-h-screen rounded-b-[50px]">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Main Blog Content (3/4) */}
@@ -44,9 +68,15 @@ const BlogPage: React.FC = () => {
               <h1 className="text-4xl font-bold text-[#3c405b] mt-6 text-center">
                 {selectedBlog.title}
               </h1>
-              <p className="text-center text-gray-500 mt-2">
-                {selectedBlog.date} • 👍 {selectedBlog.reactions} • 💬{" "}
-                {selectedBlog.comments}
+              <p className="text-center text-gray-500 mt-2 flex items-center justify-center gap-4">
+                {selectedBlog.date}
+                <button
+                  onClick={() => handleLike(selectedBlog.id)}
+                  className="flex items-center gap-1 text-[#3c405b] hover:text-[#2E3453] transition"
+                >
+                  👍 {selectedBlog.reactions}
+                </button>
+                • 💬 {selectedBlog.comments}
               </p>
             </div>
 
@@ -75,13 +105,22 @@ const BlogPage: React.FC = () => {
                   </div>
                 ))}
               </div>
-              <form onSubmit={handleCommentSubmit} className="mt-6">
+              <form onSubmit={handleCommentSubmit} className="mt-6 space-y-4">
+                <input
+                  type="email"
+                  value={newEmail}
+                  onChange={(e) => setNewEmail(e.target.value)}
+                  placeholder="Your email"
+                  className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3c405b]"
+                  required
+                />
                 <textarea
                   value={newComment}
                   onChange={(e) => setNewComment(e.target.value)}
                   placeholder="Write a comment..."
                   className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3c405b]"
-                  rows={4}
+                  rows={3}
+                  required
                 />
                 <button
                   type="submit"
@@ -102,8 +141,9 @@ const BlogPage: React.FC = () => {
               {blogs.map((blog) => (
                 <div
                   key={blog.id}
-                  className={`bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer mb-6 ${selectedBlog.id === blog.id ? "ring-2 ring-[#3c405b]" : ""
-                    }`}
+                  className={`bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer mb-6 ${
+                    selectedBlog.id === blog.id ? "ring-2 ring-[#3c405b]" : ""
+                  }`}
                   onClick={() => {
                     setSelectedBlog(blog);
                     setComments([]); // reset comments per blog (optional)
@@ -115,10 +155,20 @@ const BlogPage: React.FC = () => {
                     className="w-full h-32 object-cover"
                   />
                   <div className="p-4">
-                    <h3 className="text-lg font-bold text-[#3c405b]">{blog.title}</h3>
+                    <h3 className="text-lg font-bold text-[#3c405b]">
+                      {blog.title}
+                    </h3>
                     <p className="text-sm text-gray-500 mt-1">{blog.date}</p>
                     <div className="flex justify-between text-sm text-gray-600 mt-3">
-                      <span>👍 {blog.reactions}</span>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation(); // prevent triggering blog selection
+                          handleLike(blog.id);
+                        }}
+                        className="flex items-center gap-1 text-[#3c405b] hover:text-[#2E3453] transition"
+                      >
+                        👍 {blog.reactions}
+                      </button>
                       <span>💬 {blog.comments}</span>
                     </div>
                   </div>
@@ -126,8 +176,12 @@ const BlogPage: React.FC = () => {
               ))}
             </div>
           </div>
-
         </div>
+      </div>
+
+      {/* Subscribe Section */}
+      <div className="bg-gray-100 mt-10 rounded-b-[50px]">
+        <SubscribeSection />
       </div>
     </div>
   );

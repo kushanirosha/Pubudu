@@ -1,59 +1,68 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import Contact from '../components/Contact';
+import SubscribeSection from '../components/subscribe';
+import Profile from '../public/images/profileAbout.jpg';
+import SkillsSection from '../components/SkillsSection';
 
 interface Skill {
   name: string;
   level: number;
 }
 
-interface Experience {
-  period: string;
-  title: string;
-  company: string;
-  description: string;
-}
+// interface Experience {
+//   period: string;
+//   title: string;
+//   company: string;
+//   description: string;
+// }
 
 const AboutPage: React.FC = () => {
-  const skills: Skill[] = [
-    { name: 'JavaScript', level: 95 },
-    { name: 'React', level: 90 },
-    { name: 'Node.js', level: 85 },
-    { name: 'CSS/SCSS', level: 92 },
-    { name: 'UI/UX Design', level: 88 },
-    { name: 'MongoDB', level: 80 }
-  ];
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
-  const experience: Experience[] = [
-    {
-      period: '2022 - Present',
-      title: 'Senior Web Developer',
-      company: 'Tech Solutions Inc.',
-      description: 'Leading development of complex web applications and mentoring junior developers.'
-    },
-    {
-      period: '2020 - 2022',
-      title: 'Full Stack Developer',
-      company: 'Digital Agency Pro',
-      description: 'Developed responsive websites and e-commerce solutions for various clients.'
-    },
-    {
-      period: '2018 - 2020',
-      title: 'Frontend Developer',
-      company: 'StartupXYZ',
-      description: 'Built user interfaces and implemented responsive designs for web applications.'
-    }
-  ];
+
+  // const skills: Skill[] = [
+  //   { name: 'Photoshop', level: 95 },
+  //   { name: 'Illustrator', level: 92 },
+  //   { name: 'Indesign', level: 90 },
+  //   { name: 'Animate', level: 88 },
+  //   { name: 'Premiere Pro', level: 85 },
+  //   { name: 'After Effect', level: 80 }
+  // ];
+
+  // const experience: Experience[] = [
+  //   {
+  //     period: '2022 - Present',
+  //     title: 'Senior Web Developer',
+  //     company: 'Tech Solutions Inc.',
+  //     description: 'Leading development of complex web applications and mentoring junior developers.'
+  //   },
+  //   {
+  //     period: '2020 - 2022',
+  //     title: 'Full Stack Developer',
+  //     company: 'Digital Agency Pro',
+  //     description: 'Developed responsive websites and e-commerce solutions for various clients.'
+  //   },
+  //   {
+  //     period: '2018 - 2020',
+  //     title: 'Frontend Developer',
+  //     company: 'StartupXYZ',
+  //     description: 'Built user interfaces and implemented responsive designs for web applications.'
+  //   }
+  // ];
 
   return (
-    <div className="pt-20">
+    <div className="bg-gray-100 rounded-b-[50px]">
       {/* Hero / About */}
-      <section className="bg-gray-50 py-16">
+      <section className="bg-gray-50 pb-16 pt-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
             {/* Left Side - Image */}
             <div className="flex justify-center">
               <img
-                src="https://via.placeholder.com/400x500"
+                src={Profile}
                 alt="Profile"
                 className="w-full max-w-sm h-[500px] object-cover rounded-2xl shadow-xl border-4 border-gray-100"
               />
@@ -83,7 +92,9 @@ const AboutPage: React.FC = () => {
 
               {/* Download CV Button */}
               <a
-                href="#"
+                href=""
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-block px-6 py-3 bg-[#3c405b] text-white rounded-lg shadow-md hover:bg-gray-700 transition-colors"
               >
                 Download CV
@@ -94,7 +105,7 @@ const AboutPage: React.FC = () => {
       </section>
 
       {/* Skills */}
-      <section className="bg-white py-16">
+      {/* <section className="bg-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-[#3c405b] mb-4">Skills & Expertise</h2>
@@ -120,10 +131,12 @@ const AboutPage: React.FC = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
+
+      <SkillsSection />
 
       {/* Experience */}
-      <section className="bg-gray-50 py-16">
+      {/* <section className="bg-gray-50 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-[#3c405b] mb-4">Experience</h2>
@@ -146,24 +159,39 @@ const AboutPage: React.FC = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Values */}
       <section className="bg-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-[#3c405b] mb-4">My Values</h2>
-            <p className="text-lg text-gray-600">The principles that guide my work and client relationships</p>
+            <p className="text-lg text-gray-600">
+              The principles that guide my work and client relationships
+            </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { icon: "🎯", title: "Quality First", text: "I never compromise on quality. Every line of code is written with precision and every design element is carefully crafted." },
-              { icon: "🤝", title: "Collaboration", text: "I believe the best results come from working closely with clients, understanding their needs and involving them in the process." },
-              { icon: "🚀", title: "Innovation", text: "I stay current with the latest technologies and trends to deliver cutting-edge solutions that give you a competitive edge." }
+              {
+                icon: "🎯",
+                title: "Quality First",
+                text: "I never compromise on quality. Every line of code is written with precision and every design element is carefully crafted.",
+              },
+              {
+                icon: "🤝",
+                title: "Collaboration",
+                text: "I believe the best results come from working closely with clients, understanding their needs and involving them in the process.",
+              },
+              {
+                icon: "🚀",
+                title: "Innovation",
+                text: "I stay current with the latest technologies and trends to deliver cutting-edge solutions that give you a competitive edge.",
+              },
             ].map((value, index) => (
               <div
                 key={index}
-                className="bg-gray-50 p-6 rounded-lg border border-gray-200 shadow-sm text-center"
+                className="bg-gray-50 p-6 rounded-lg border border-gray-200 shadow-sm text-center 
+                     transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:border-[#3c405b]"
               >
                 <div className="text-5xl mb-6">{value.icon}</div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-4">{value.title}</h3>
@@ -173,6 +201,13 @@ const AboutPage: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* Contact Section */}
+      <Contact />
+
+      {/* Subscribe Section  */}
+      <SubscribeSection />
+
     </div>
   );
 };

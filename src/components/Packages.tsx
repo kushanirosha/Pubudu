@@ -1,116 +1,199 @@
 import React, { useState } from "react";
 
-const packagesData = [
+interface Package {
+  id: number;
+  title: string;
+  description: string;
+}
+
+const packages: Package[] = [
   {
-    id: "single",
-    title: "Single User",
-    description:
-      "The perfect graphic design package for a single user, boosting creativity and efficiency.",
-    planLabel: "Single Plan",
-    buttonLabel: "Book Now",
+    id: 1,
+    title: "Social Media Post Design",
+    description: "5 custom graphics optimized for Instagram & Facebook",
   },
   {
-    id: "business",
-    title: "Business User",
-    description:
-      "The perfect graphic design package for companies, boosting creativity and streamlining team collaboration.",
-    planLabel: "Corporate Plan",
-    buttonLabel: "Book Now",
+    id: 2,
+    title: "Google Ad Banner Design",
+    description: "2 static ad banners (3 common sizes)",
   },
   {
-    id: "coming",
-    title: "Coming Soon",
-    description:
-      "An innovative new package is coming soon, packed with features to fuel your design work.",
-    planLabel: "Corporate Plan",
-    buttonLabel: "Book Now",
+    id: 3,
+    title: "Thumbnail Design",
+    description: "3 eye-catching YouTube/social media thumbnails",
+  },
+  {
+    id: 4,
+    title: "Leaflet Design",
+    description: "1 single-sided leaflet design",
+  },
+  {
+    id: 5,
+    title: "Logo Design",
+    description: "1 primary logo + 2 variations (sub-mark & icon)",
+  },
+  {
+    id: 6,
+    title: "Brand Kit Design",
+    description: "Color palette, typography & basic brand guide",
+  },
+  {
+    id: 7,
+    title: "Presentation Design",
+    description: "10 slides for business or pitch deck",
+  },
+  {
+    id: 8,
+    title: "Animation GIFs",
+    description: "3 short looping GIFs for social media",
+  },
+  {
+    id: 9,
+    title: "Video Creation",
+    description: "1 edited promo/explainer video (up to 60s)",
+  },
+  {
+    id: 10,
+    title: "Animation Video",
+    description: "1 animated video (up to 30s)",
+  },
+  {
+    id: 11,
+    title: "Website Development",
+    description: "5-page responsive website design & development",
   },
 ];
 
-const Packages: React.FC = () => {
-  const [active, setActive] = useState("business");
+const QuotationPage: React.FC = () => {
+  const [order, setOrder] = useState<{ id: number; title: string; qty: number }[]>([]);
+
+  const addToOrder = (pkg: Package, qty: number) => {
+    if (qty <= 0) return;
+    setOrder((prev) => {
+      const existing = prev.find((item) => item.id === pkg.id);
+      if (existing) {
+        return prev.map((item) =>
+          item.id === pkg.id ? { ...item, qty: item.qty + qty } : item
+        );
+      }
+      return [...prev, { id: pkg.id, title: pkg.title, qty }];
+    });
+  };
+
+  const removeItem = (id: number) => {
+    setOrder((prev) => prev.filter((item) => item.id !== id));
+  };
 
   return (
-    <section className="py-16 relative bg-gray-100">
-      <h2 className="text-4xl md:text-5xl font-bold text-center text-gray-800 mb-8 lg:mt-14">
-        Book Your Quotation
-      </h2>
+    <section className="bg-gray-50 py-16 px-6 lg:px-12">
+      <div className="max-w-7xl mx-auto">
+        {/* Heading */}
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold text-[#3c405b] mb-2">Get Your Quotation</h2>
+          <p className="text-lg text-gray-600">
+            Choose the package you want and place your order
+          </p>
+        </div>
 
-      {/* Tabs */}
-      <div className="flex justify-center gap-4 mb-10">
-        {packagesData.map((pkg) => (
-          <button
-            key={pkg.id}
-            onClick={() => setActive(pkg.id)}
-            className={`px-4 py-2 rounded-lg border transition ${
-              active === pkg.id
-                ? "bg-indigo-100 border-indigo-500 text-indigo-700"
-                : "bg-white border-gray-300 text-gray-600"
-            }`}
-          >
-            {pkg.title}
-          </button>
-        ))}
-      </div>
-
-      {/* Cards */}
-      <div className="flex justify-center items-center gap-6">
-        {packagesData.map((pkg) => (
-          <div
-            key={pkg.id}
-            className={`bg-gradient-to-b from-indigo-900 to-indigo-800 text-white rounded-2xl shadow-lg p-6 w-80 transition-transform duration-300 ${
-              active === pkg.id
-                ? "scale-110 border-4 border-indigo-300 z-10"
-                : "scale-95 opacity-80"
-            }`}
-          >
-            <div className="flex flex-col justify-between h-full">
-              <div>
-                <div className="flex items-center mb-4">
-                  <div className="bg-white/20 p-2 rounded-full">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M3 3v1h1v17H3v1h1v1h16v-1h1v-1h-1V4h1V3h-1V2H4v1H3z"
-                      />
-                    </svg>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+          {/* Left side packages */}
+          <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {packages.map((pkg) => {
+              let qtyInput = 0;
+              return (
+                <div
+                  key={pkg.id}
+                  className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow flex flex-col justify-between"
+                >
+                  <div>
+                    <h3 className="text-lg font-semibold text-[#3c405b] mb-2">{pkg.title}</h3>
+                    <p className="text-sm text-gray-600 mb-4">{pkg.description}</p>
                   </div>
-                  <h3 className="text-xl font-bold ml-3">{pkg.title}</h3>
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="number"
+                      min="1"
+                      className="w-16 border rounded-lg px-2 py-1 text-sm"
+                      onChange={(e) => (qtyInput = parseInt(e.target.value))}
+                    />
+                    <button
+                      onClick={() => addToOrder(pkg, qtyInput)}
+                      className="bg-[#3c405b] text-white px-3 py-1 rounded-lg text-sm hover:bg-gray-700 transition-colors"
+                    >
+                      Pick
+                    </button>
+                  </div>
                 </div>
-                <p className="text-sm text-gray-200">{pkg.description}</p>
-              </div>
-
-              <div className="flex justify-between items-center mt-6">
-                <span className="bg-white text-indigo-900 text-sm font-medium px-3 py-1 rounded-lg">
-                  {pkg.planLabel}
-                </span>
-                <button className="bg-white text-indigo-900 px-4 py-2 rounded-lg font-semibold hover:bg-indigo-100 transition">
-                  {pkg.buttonLabel}
-                </button>
-              </div>
-            </div>
+              );
+            })}
           </div>
-        ))}
-      </div>
 
-      {/* Footer text */}
-      <div className="max-w-3xl mx-auto mt-10 text-center text-gray-600 text-sm">
-        You can choose the package you want, and through it, the{" "}
-        <strong>Single User Package</strong> has been introduced for designs
-        that need to be purchased <strong>only once</strong>, and the{" "}
-        <strong>Business User Package</strong> for monthly{" "}
-        <strong>recurring Design needs</strong>.
+          {/* Right side form */}
+          <div className="bg-white rounded-xl shadow-lg p-6">
+            <h3 className="text-xl font-semibold text-[#3c405b] mb-4">Place Order</h3>
+
+            <form className="space-y-4">
+              <input
+                type="text"
+                placeholder="Name"
+                className="w-full border rounded-lg px-3 py-2 text-sm"
+              />
+              <input
+                type="email"
+                placeholder="Email"
+                className="w-full border rounded-lg px-3 py-2 text-sm"
+              />
+              <input
+                type="tel"
+                placeholder="Contact Number"
+                className="w-full border rounded-lg px-3 py-2 text-sm"
+              />
+
+              <hr />
+
+              <h4 className="text-md font-semibold text-gray-700">Order Details</h4>
+              <div className="space-y-2">
+                {order.map((item) => (
+                  <div
+                    key={item.id}
+                    className="flex justify-between items-center bg-gray-100 px-3 py-2 rounded-lg"
+                  >
+                    <span className="text-sm font-medium">{item.title}</span>
+                    <div className="flex items-center gap-3">
+                      <span className="text-sm text-gray-600">x{item.qty}</span>
+                      <button
+                        type="button"
+                        className="text-red-500 hover:text-red-700 text-xs"
+                        onClick={() => removeItem(item.id)}
+                      >
+                        ✕
+                      </button>
+                    </div>
+                  </div>
+                ))}
+                {order.length === 0 && (
+                  <p className="text-sm text-gray-500">No items selected yet</p>
+                )}
+              </div>
+
+              <textarea
+                placeholder="Write here something..."
+                className="w-full border rounded-lg px-3 py-2 text-sm"
+                rows={3}
+              />
+
+              <button
+                type="submit"
+                className="w-full bg-[#3c405b] text-white py-2 rounded-lg shadow-md hover:bg-gray-700 transition-colors"
+              >
+                Request Quotation
+              </button>
+            </form>
+          </div>
+        </div>
       </div>
     </section>
   );
 };
 
-export default Packages;
+export default QuotationPage;

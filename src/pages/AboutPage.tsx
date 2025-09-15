@@ -4,10 +4,10 @@ import SubscribeSection from '../components/subscribe';
 import Profile from '../public/images/profileAbout.jpg';
 import SkillsSection from '../components/SkillsSection';
 
-interface Skill {
-  name: string;
-  level: number;
-}
+// interface Skill {
+//   name: string;
+//   level: number;
+// }
 
 // interface Experience {
 //   period: string;
@@ -92,10 +92,10 @@ const AboutPage: React.FC = () => {
 
               {/* Download CV Button */}
               <a
-                href=""
+                href="/src/public/Pubudu Wijerathne.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block px-6 py-3 bg-[#3c405b] text-white rounded-lg shadow-md hover:bg-gray-700 transition-colors"
+                className="inline-block px-6 py-3 bg-[#3c405b] text-white rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300"
               >
                 Download CV
               </a>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import PS from "../public/images/ps.png";
 import AI from "../public/images/ai.png";
 import ID from "../public/images/Id.png";
@@ -21,7 +21,10 @@ const skills: Skill[] = [
   { name: "After Effect", level: 80, image: AE },
 ];
 
-const CircleSkill: React.FC<{ skill: Skill }> = ({ skill }) => {
+const CircleSkill: React.FC<{ skill: Skill; isVisible: boolean }> = ({
+  skill,
+  isVisible,
+}) => {
   const radius = 60;
   const stroke = 10;
   const circumference = 2 * Math.PI * radius;
@@ -29,6 +32,8 @@ const CircleSkill: React.FC<{ skill: Skill }> = ({ skill }) => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
+    if (!isVisible) return; // only start when visible
+
     let start = 0;
     const interval = setInterval(() => {
       start += 1;
@@ -37,9 +42,10 @@ const CircleSkill: React.FC<{ skill: Skill }> = ({ skill }) => {
       } else {
         clearInterval(interval);
       }
-    }, 20); // speed
+    }, 20);
+
     return () => clearInterval(interval);
-  }, [skill.level]);
+  }, [isVisible, skill.level]);
 
   return (
     <div className="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center w-72 hover:shadow-xl transition-shadow duration-300">
@@ -84,8 +90,31 @@ const CircleSkill: React.FC<{ skill: Skill }> = ({ skill }) => {
 };
 
 const SkillsSection: React.FC = () => {
+  const sectionRef = useRef<HTMLDivElement | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect(); // trigger only once
+        }
+      },
+      { threshold: 0.3 } // trigger when 30% is visible
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) observer.unobserve(sectionRef.current);
+    };
+  }, []);
+
   return (
-    <section className="bg-gray-50 py-16">
+    <section ref={sectionRef} className="bg-gray-50 py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-[#3c405b] mb-4">
@@ -98,7 +127,7 @@ const SkillsSection: React.FC = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 place-items-center">
           {skills.map((skill, index) => (
-            <CircleSkill key={index} skill={skill} />
+            <CircleSkill key={index} skill={skill} isVisible={isVisible} />
           ))}
         </div>
       </div>
@@ -107,3 +136,5 @@ const SkillsSection: React.FC = () => {
 };
 
 export default SkillsSection;
+
+

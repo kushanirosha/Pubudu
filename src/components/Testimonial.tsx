@@ -53,56 +53,63 @@ export default function FeedbackSection() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen px-6 bg-cover bg-center" style={{ backgroundImage: `url(${bgImg})` }}>
-      {/* Left side carousel */}
-      <div className="flex gap-4 items-center">
-        {feedbacks.map((person, index) => {
-          const isActive = index === activeIndex;
-          return (
-            <div
-              key={person.id}
-              onClick={() => setActiveIndex(index)}
-              className={`flex flex-col items-center justify-center rounded-lg bg-[#2E3453] text-white cursor-pointer transition-all duration-300 ${
-                isActive
-                  ? "h-96 w-40"
-                  : "h-48 w-28 opacity-60 hover:opacity-80"
-              }`}
-            >
-              <div className="text-6xl font-bold">{person.initial}</div>
-              <div className="mt-4 flex flex-col items-center text-center">
-                <FaUser className="text-2xl mb-1" />
-                <p className="text-sm font-semibold">{person.name}</p>
-                <p className="text-xs opacity-80">{person.designation}</p>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Right side feedback */}
-      <div className="ml-10 max-w-lg">
-        <div className="flex items-center gap-2 mb-3">
-          <FaUser className="text-xl text-[#2E3453]" />
-          <div>
-            <p className="font-bold text-lg text-[#2E3453]">
-              {feedbacks[activeIndex].name}
-            </p>
-            <p className="text-sm text-gray-500">
-              {feedbacks[activeIndex].designation} /{" "}
-              {feedbacks[activeIndex].company}
-            </p>
-          </div>
-        </div>
-        <p className="text-gray-600 italic">
-          “{feedbacks[activeIndex].feedback}”
+    <>
+      <div className="text-center mb-12">
+        <h2 className="text-3xl font-bold text-[#3c405b] mb-2">Get Your Quotation</h2>
+        <p className="text-lg text-gray-600">
+          Choose the package you want and place your order
         </p>
-        <button
-          onClick={handleNext}
-          className="mt-6 w-10 h-10 flex items-center justify-center bg-[#2E3453] rounded-full text-white"
-        >
-          →
-        </button>
       </div>
-    </div>
+      <div className="flex items-center justify-center min-h-screen px-6 bg-cover bg-center" style={{ backgroundImage: `url(${bgImg})` }}>
+        {/* Left side carousel */}
+        <div className="flex gap-4 items-center">
+          {feedbacks.map((person, index) => {
+            const isActive = index === activeIndex;
+            return (
+              <div
+                key={person.id}
+                onClick={() => setActiveIndex(index)}
+                className={`flex flex-col items-center justify-center rounded-lg bg-[#2E3453] text-white cursor-pointer transition-all duration-300 ${isActive
+                    ? "h-96 w-40"
+                    : "h-48 w-28 opacity-60 hover:opacity-80"
+                  }`}
+              >
+                <div className="text-6xl font-bold">{person.initial}</div>
+                <div className="mt-4 flex flex-col items-center text-center">
+                  <FaUser className="text-2xl mb-1" />
+                  <p className="text-sm font-semibold">{person.name}</p>
+                  <p className="text-xs opacity-80">{person.designation}</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Right side feedback */}
+        <div className="ml-10 max-w-lg">
+          <div className="flex items-center gap-2 mb-3">
+            <FaUser className="text-xl text-[#2E3453]" />
+            <div>
+              <p className="font-bold text-lg text-[#2E3453]">
+                {feedbacks[activeIndex].name}
+              </p>
+              <p className="text-sm text-gray-500">
+                {feedbacks[activeIndex].designation} /{" "}
+                {feedbacks[activeIndex].company}
+              </p>
+            </div>
+          </div>
+          <p className="text-gray-600 italic">
+            “{feedbacks[activeIndex].feedback}”
+          </p>
+          <button
+            onClick={handleNext}
+            className="mt-6 w-10 h-10 flex items-center justify-center bg-[#2E3453] rounded-full text-white"
+          >
+            →
+          </button>
+        </div>
+      </div>
+    </>
   );
 }

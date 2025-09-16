@@ -148,6 +148,14 @@ const QuotationPage: React.FC = () => {
                   )}
                 </div>
 
+                 <hr />
+
+                <input
+                  type="tel"
+                  placeholder="Asstimate Budjet"
+                  className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all duration-200"
+                />
+
                 <textarea
                   placeholder="Write here something..."
                   className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all duration-200"
@@ -178,7 +186,7 @@ const QuotationPage: React.FC = () => {
             <p className="text-gray-800 font-medium">{alert}</p>
             <button
               onClick={() => setAlert(null)}
-              className="mt-4 bg-[#3c405b] text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition"
+              className="mt-4 bg-[#3c405b] text-white px-4 py-2 rounded-lg hover:bg-gray-700 hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300"
             >
               OK
             </button>

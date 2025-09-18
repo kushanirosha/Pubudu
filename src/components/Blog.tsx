@@ -1,40 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import BlogCards from "./BlogCards";
+import CommentModal from "./CommentModal";
 
+const Blog: React.FC = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-const BeyondTheBrief: React.FC = () => {
   return (
-    <section className="relative bg-gradient-to-b from-indigo-200 via-purple-300 to-blue-400 overflow-hidden">
-      {/* Waves */}
-      <div className="absolute bottom-0 left-0 w-full z-0">
-        <img src="/images/waves.svg" alt="waves" className="w-full" />
+    <section className="relative z-10 py-16 px-6 text-center bg-gray-100 rounded-b-[50px]">
+      {/* Heading */}
+      <h2 className="text-3xl md:text-4xl font-bold text-[#3c405b]">
+        Beyond the Brief
+      </h2>
+      <p className="text-lg md:text-base text-gray-500 mt-2">
+        How to Find Your Creative Spark When You're Stuck
+      </p>
+
+      {/* Cards */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <BlogCards />
       </div>
 
-      <div className="relative z-10 py-16 text-center">
-        {/* Heading */}
-        <h2 className="text-4xl md:text-5xl font-bold text-white">
-          Beyond the Brief
-        </h2>
-        <p className="text-lg md:text-xl text-white mt-2">
-          How to Find Your Creative Spark When You're Stuck
+      {/* Question */}
+      <div className="mt-16 text-[#3c405b]">
+        <p className="text-lg font-medium">
+          What Are Your Biggest Design Questions?
         </p>
-
-        {/* Cards */}
-       <BlogCards/>
-
-        {/* Question */}
-        <div className="mt-16 text-white">
-          <p className="text-lg font-medium">
-            What Are Your Biggest Design Questions?
-          </p>
-          <p className="text-md">— Ask Us Below! —</p>
-          <button className="mt-4 px-6 py-3 bg-white text-indigo-800 font-semibold rounded-lg shadow hover:bg-indigo-100 transition">
-            Comment Here
-          </button>
-        </div>
+        <p className="text-md text-gray-500">— Ask Us Below! —</p>
+        <button
+          onClick={() => setIsModalOpen(true)}
+          className="mt-4 inline-block px-6 py-3 bg-[#3c405b] text-white rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300"
+        >
+          Comment Here
+        </button>
       </div>
+
+      {/* Comment Modal */}
+      <CommentModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </section>
   );
 };
 
-export default BeyondTheBrief;
+export default Blog;

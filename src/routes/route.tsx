@@ -5,6 +5,7 @@ import Portfolio from "../pages/PortfolioPage";
 import About from "../pages/AboutPage";
 import Blog from "../pages/BlogPage";
 import ProjectDetailsPage from "../pages/ProjectsPage"; 
+import HirePage from "../pages/HirePage";
 
 const RoutesComponent: React.FC = () => {
   return (
@@ -14,6 +15,7 @@ const RoutesComponent: React.FC = () => {
       <Route path="/portfolio" element={<Portfolio />} />
       <Route path="/about" element={<About />} />
       <Route path="/blog" element={<Blog />} />
+      <Route path="/hire" element={<HirePage />} />
       <Route path="/projects/:projectId" element={<ProjectDetailsPage />} /> 
     </Routes>
   );

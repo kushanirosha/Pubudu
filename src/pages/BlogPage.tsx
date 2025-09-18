@@ -81,10 +81,8 @@ const BlogPage: React.FC = () => {
             </div>
 
             {/* Description */}
-            <div>
-              <p className="text-gray-700 leading-relaxed">
+            <div className="text-gray-700">
                 {selectedBlog.description}
-              </p>
             </div>
 
             {/* Comments */}

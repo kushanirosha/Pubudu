@@ -33,15 +33,17 @@ const Header: React.FC = () => {
           <img src={logo} alt="Logo" className="h-10 w-auto" />
         </div>
 
-        {/* Desktop Nav */}
-        <div className="hidden md:flex items-center space-x-8">
+        {/* Desktop Nav - Centered */}
+        <div className="hidden md:flex flex-1 justify-center items-center space-x-8">
           {navItems.map((item) => (
             <NavLink
               key={item.name}
               to={item.href}
               className={({ isActive }) =>
                 `relative group font-medium transition-colors ${
-                  isActive ? "text-blue-800" : "text-[#3c405b] hover:text-blue-800"
+                  isActive
+                    ? "text-blue-800"
+                    : "text-[#3c405b] hover:text-blue-800"
                 }`
               }
             >
@@ -51,13 +53,25 @@ const Header: React.FC = () => {
                   {/* Underline */}
                   <span
                     className={`absolute left-0 -bottom-1 h-0.5 bg-blue-800 transition-all duration-300 ${
-                      window.location.pathname === item.href ? "w-full" : "w-0 group-hover:w-full"
+                      window.location.pathname === item.href
+                        ? "w-full"
+                        : "w-0 group-hover:w-full"
                     }`}
                   ></span>
                 </>
               )}
             </NavLink>
           ))}
+        </div>
+
+        {/* Hire Me Button (Right Side) */}
+        <div className="hidden md:flex">
+          <a
+            href="/hire"
+            className="bg-[#2E3453] text-white px-6 py-2 rounded-lg font-semibold hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300"
+          >
+            Hire Me
+          </a>
         </div>
 
         {/* Mobile Toggle */}
@@ -79,18 +93,30 @@ const Header: React.FC = () => {
               onClick={() => setIsMenuOpen(false)}
               className={({ isActive }) =>
                 `relative font-medium text-lg transition-colors ${
-                  isActive ? "text-blue-800" : "text-[#3c405b] hover:text-blue-800"
+                  isActive
+                    ? "text-blue-800"
+                    : "text-[#3c405b] hover:text-blue-800"
                 }`
               }
             >
               {item.name}
               <span
                 className={`absolute left-0 -bottom-1 h-0.5 bg-blue-800 transition-all duration-300 ${
-                  window.location.pathname === item.href ? "w-full" : "w-0 group-hover:w-full"
+                  window.location.pathname === item.href
+                    ? "w-full"
+                    : "w-0 group-hover:w-full"
                 }`}
               ></span>
             </NavLink>
           ))}
+
+          {/* Hire Me button in mobile menu */}
+          <a
+            href="/hire"
+            className="bg-blue-800 text-white px-5 py-2 rounded-lg shadow-md hover:bg-blue-700 transition w-full text-center"
+          >
+            Hire Me
+          </a>
         </div>
       )}
     </header>

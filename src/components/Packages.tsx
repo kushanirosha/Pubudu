@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 interface Package {
   id: number;
@@ -28,6 +28,8 @@ const packages: Package[] = [
 const QuotationPage: React.FC = () => {
   const [order, setOrder] = useState<{ id: number; title: string; qty: number }[]>([]);
   const [alert, setAlert] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
+  const [progress, setProgress] = useState(100);
 
   const addToOrder = (pkg: Package, qty: number) => {
     if (qty <= 0 || isNaN(qty)) {
@@ -48,6 +50,23 @@ const QuotationPage: React.FC = () => {
 
   const removeItem = (id: number) => {
     setOrder((prev) => prev.filter((item) => item.id !== id));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSuccess(true);
+    setProgress(100);
+
+    let interval: NodeJS.Timeout;
+    let timeLeft = 5; // 5 seconds
+    interval = setInterval(() => {
+      timeLeft--;
+      setProgress((prev) => prev - 20); // 100% → 0% in 5 steps
+      if (timeLeft <= 0) {
+        clearInterval(interval);
+        setSuccess(false);
+      }
+    }, 1000);
   };
 
   return (
@@ -102,22 +121,10 @@ const QuotationPage: React.FC = () => {
             <div className="bg-white rounded-xl shadow-2xl p-6 border-y-2 h-fit">
               <h3 className="text-xl font-semibold text-[#3c405b] mb-4">Place Order</h3>
 
-              <form className="space-y-4">
-                <input
-                  type="text"
-                  placeholder="Name"
-                  className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all duration-200"
-                />
-                <input
-                  type="email"
-                  placeholder="Email"
-                  className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all duration-200"
-                />
-                <input
-                  type="tel"
-                  placeholder="Contact Number"
-                  className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all duration-200"
-                />
+              <form className="space-y-4" onSubmit={handleSubmit}>
+                <input type="text" placeholder="Name" className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all duration-200" />
+                <input type="email" placeholder="Email" className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all duration-200" />
+                <input type="tel" placeholder="Contact Number" className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all duration-200" />
 
                 <hr />
 
@@ -148,24 +155,12 @@ const QuotationPage: React.FC = () => {
                   )}
                 </div>
 
-                 <hr />
+                <hr />
 
-                <input
-                  type="tel"
-                  placeholder="Asstimate Budjet"
-                  className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all duration-200"
-                />
+                <input type="tel" placeholder="Estimate Budget" className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all duration-200" />
+                <textarea placeholder="Write here something..." className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all duration-200" rows={3} />
 
-                <textarea
-                  placeholder="Write here something..."
-                  className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all duration-200"
-                  rows={3}
-                />
-
-                <button
-                  type="submit"
-                  className="w-full bg-[#3c405b] text-white py-2 rounded-lg shadow-md hover:bg-gray-700 hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300"
-                >
+                <button type="submit" className="w-full bg-[#3c405b] text-white py-2 rounded-lg shadow-md hover:bg-gray-700 hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300">
                   Request Quotation
                 </button>
                 <p className="text-sm text-gray-500">
@@ -190,6 +185,28 @@ const QuotationPage: React.FC = () => {
             >
               OK
             </button>
+          </div>
+        </div>
+      )}
+
+      {/* ✅ Success Modal */}
+      {success && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white rounded-lg shadow-lg text-center max-w-sm relative overflow-hidden">
+            {/* Progress bar */}
+            <div
+              className="absolute top-0 left-0 h-1 bg-green-500 transition-all duration-1000"
+              style={{ width: `${progress}%` }}
+            ></div>
+
+            <div className="p-6">
+              <h4 className="text-lg font-semibold text-[#3c405b] mb-2">
+                Success 🎉
+              </h4>
+              <p className="text-gray-700">
+                We will send the quotation within 24 hours.
+              </p>
+            </div>
           </div>
         </div>
       )}

@@ -113,7 +113,7 @@ const Header: React.FC = () => {
           {/* Hire Me button in mobile menu */}
           <a
             href="/hire"
-            className="bg-blue-800 text-white px-5 py-2 rounded-lg shadow-md hover:bg-blue-700 transition w-full text-center"
+            className="bg-[#2E3453] text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300"
           >
             Hire Me
           </a>

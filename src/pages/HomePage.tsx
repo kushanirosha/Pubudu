@@ -5,6 +5,8 @@ import Hero from "../components/Hero";
 import Projects from "../components/Projects";
 import FullScreenBlobs from "../components/gradientBlob";
 import SubscribeSection from "../components/subscribe";
+import ServicesSection from "../components/Service";
+import IntroductionSection from "../components/Introduction";
 
 const HomePage: React.FC = () => {
   useEffect(() => {
@@ -18,12 +20,18 @@ const HomePage: React.FC = () => {
 
       {/* Main content on top */}
       <div className="relative z-50">
-        <section>
+        {/* <section>
           <Hero />
+        </section> */}
+        <section>
+          <IntroductionSection />
         </section>
         <section>
-          <About />
+          <ServicesSection />
         </section>
+        {/* <section>
+          <About />
+        </section> */}
         <section>
           <Projects />
         </section>

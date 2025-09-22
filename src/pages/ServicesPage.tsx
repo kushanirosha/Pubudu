@@ -2,6 +2,7 @@ import Packages from '../components/Packages'
 import Testimonial from '../components/Testimonial'
 import Blog from '../components/Blog'
 import { useEffect } from 'react';
+import AboutSection from '../components/About';
 
 const ServicesPage = () => {
     useEffect(() => {
@@ -9,7 +10,7 @@ const ServicesPage = () => {
     }, []);
   return (
     <div className=''>
-
+      <AboutSection/>
       <Packages/>
       <Testimonial/>
       <Blog/>

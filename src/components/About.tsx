@@ -31,6 +31,7 @@ const AboutSection = () => {
   }, []);
 
   return (
+    <div className="bg-gray-100">
     <div
       ref={sectionRef}
       className="relative z-20 flex items-center justify-between min-h-screen max-w-7xl mx-auto px-6 lg:px-12"
@@ -90,6 +91,7 @@ const AboutSection = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

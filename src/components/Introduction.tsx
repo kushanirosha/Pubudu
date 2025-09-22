@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import Bgvideo from '../public/bgvideo.mp4'
 
 const IntroductionSection: React.FC = () => {
   return (
@@ -12,11 +13,11 @@ const IntroductionSection: React.FC = () => {
         playsInline
         className="absolute inset-0 w-full h-full object-cover"
       >
-        <source src="/background.mp4" type="video/mp4" />
+        <source src={Bgvideo} type="video/mp4" />
       </video>
 
       {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/60"></div>
+      {/* <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/60"></div> */}
 
       {/* Left Fence */}
       <div className="absolute left-8 top-1/2 -translate-y-1/2 grid grid-cols-3 grid-rows-3 gap-2 opacity-70">

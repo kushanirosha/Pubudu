@@ -71,7 +71,7 @@ const QuotationPage: React.FC = () => {
 
   return (
     <div className="bg-gray-100 relative">
-      <section className="pb-20 pt-28 max-w-7xl mx-auto px-6 lg:px-12">
+      <section className="pb-20 max-w-7xl mx-auto px-6 lg:px-12">
         <div className="max-w-7xl mx-auto">
           {/* Heading */}
           <div className="text-center mb-12">

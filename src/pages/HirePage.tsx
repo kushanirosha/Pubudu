@@ -5,7 +5,7 @@ import SubscribeSection from '../components/subscribe'
 
 const HirePage = () => {
   return (
-    <div className='bg-gray-100 rounded-b-[50px]'>
+    <div className='bg-gray-100 rounded-b-[50px] pt-28'>
       <Packages/>
       <Contact/>
       <SubscribeSection/>

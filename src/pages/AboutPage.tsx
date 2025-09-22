@@ -3,6 +3,8 @@ import Contact from '../components/Contact';
 import SubscribeSection from '../components/subscribe';
 import Profile from '../public/images/profileAbout.jpg';
 import SkillsSection from '../components/SkillsSection';
+import PortfolioPage from './PortfolioPage';
+import HeroSection from '../components/Hero';
 
 // interface Skill {
 //   name: string;
@@ -54,7 +56,10 @@ const AboutPage: React.FC = () => {
 
   return (
     <div className="bg-gray-100 rounded-b-[50px]">
-      {/* Hero / About */}
+       {/* Hero section */}
+        <HeroSection/>
+
+      {/* About Section */}
       <section className="bg-gray-100 pb-16 pt-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">

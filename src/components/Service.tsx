@@ -1,12 +1,12 @@
 import React from "react";
-import logo from "../public/images/logo 22.png";
+import logo from "../public/images/logo4.png";
 
 const ServicesSection: React.FC = () => {
     return (
         <section className="text-[#3c405b] py-16 max-w-7xl mx-auto px-6 lg:px-12">
             <div className="text-center">
                 {/* Logo */}
-                <img src={logo} alt="Brand Beecon Logo" className="mx-auto w-40 h-40" />
+                <img src={logo} alt="Brand Beecon Logo" className="mx-auto w-15 h-20" />
 
                 {/* Title */}
                 <h2 className="text-2xl font-bold">BRAND BEECON</h2>

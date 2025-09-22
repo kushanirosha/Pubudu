@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
-import Bgvideo from '../public/bgvideo.mp4'
+import Bgvideo from '../public/intro1.mp4';
+import logo from '../public/images/logo4.png'
 
 const IntroductionSection: React.FC = () => {
   return (
@@ -58,7 +59,7 @@ const IntroductionSection: React.FC = () => {
       {/* Text Content */}
       <div className="relative z-10 text-center text-white px-6">
         <motion.img
-          src="/logo.png"
+          src={logo}
           alt="Logo"
           className="mx-auto mb-6 w-16"
           initial={{ opacity: 0, y: -40 }}

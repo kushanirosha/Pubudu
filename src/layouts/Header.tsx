@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
-import logo from "../public/images/logo.png";
+import logo from "../public/images/logo with name.png";
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);

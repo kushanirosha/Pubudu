@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import { FaBehance, FaPinterest } from "react-icons/fa";
+import ContactForm from './conatctform';
 
 
 const Contact: React.FC = () => {
@@ -127,7 +128,7 @@ const Contact: React.FC = () => {
           </div>
 
           {/* Contact Form */}
-          <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
+          {/* <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
             <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
               <h3 className="text-2xl font-bold text-[#3c405b] dark:text-white mb-6">
                 Send a Message
@@ -204,7 +205,9 @@ const Contact: React.FC = () => {
                 </span>
               </button>
             </form>
-          </div>
+          </div> */}
+          <ContactForm/>
+
         </div>
       </div>
     </section>

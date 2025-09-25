@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { X, Send } from "lucide-react"; // icons
+import { X, Send, CheckCircle, Loader2 } from "lucide-react"; // icons
 
 interface CommentModalProps {
   isOpen: boolean;
@@ -9,16 +9,31 @@ interface CommentModalProps {
 const CommentModal: React.FC<CommentModalProps> = ({ isOpen, onClose }) => {
   const [email, setEmail] = useState("");
   const [comment, setComment] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  if (!isOpen) return null; // don't render when closed
+  if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
+    setSuccessMessage("");
+
+    // Simulate API call
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
     console.log("Email:", email, "Comment:", comment);
-    // 👉 here you can call API to save comment
+
+    // Clear fields
     setEmail("");
     setComment("");
-    onClose();
+
+    // Show success
+    setSuccessMessage("✅ Your comment has been submitted successfully!");
+    setLoading(false);
+
+    // Auto-hide success after 3s
+    setTimeout(() => setSuccessMessage(""), 3000);
   };
 
   return (
@@ -28,6 +43,7 @@ const CommentModal: React.FC<CommentModalProps> = ({ isOpen, onClose }) => {
         {/* Close Icon */}
         <button
           onClick={onClose}
+          disabled={loading}
           className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
         >
           <X size={24} />
@@ -47,7 +63,8 @@ const CommentModal: React.FC<CommentModalProps> = ({ isOpen, onClose }) => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-2 focus:ring-2 focus:ring-[#3c405b] focus:outline-none"
+            disabled={loading}
+            className="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-2 focus:ring-2 focus:ring-[#3c405b] focus:outline-none disabled:opacity-50"
           />
 
           {/* Comment */}
@@ -57,17 +74,34 @@ const CommentModal: React.FC<CommentModalProps> = ({ isOpen, onClose }) => {
             onChange={(e) => setComment(e.target.value)}
             required
             rows={4}
-            className="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-2 focus:ring-2 focus:ring-[#3c405b] focus:outline-none"
+            disabled={loading}
+            className="w-full border border-gray-300 dark:border-gray-700 rounded-lg px-4 py-2 focus:ring-2 focus:ring-[#3c405b] focus:outline-none disabled:opacity-50"
           />
 
           {/* Submit */}
           <button
             type="submit"
-            className="w-full flex items-center justify-center gap-2 bg-[#3c405b] text-white py-2 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300"
+            disabled={loading}
+            className="w-full flex items-center justify-center gap-2 bg-[#3c405b] text-white py-2 rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 disabled:opacity-50"
           >
-            Submit <Send size={18} />
+            {loading ? (
+              <>
+                <Loader2 className="animate-spin" size={18} /> Submitting...
+              </>
+            ) : (
+              <>
+                Submit <Send size={18} />
+              </>
+            )}
           </button>
         </form>
+
+        {/* Success Message */}
+        {successMessage && (
+          <p className="mt-4 flex items-center gap-2 text-green-600 text-sm font-medium">
+            <CheckCircle size={18} /> {successMessage}
+          </p>
+        )}
       </div>
     </div>
   );
